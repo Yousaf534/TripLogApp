@@ -1,0 +1,37 @@
+@model IEnumerable<TripLog.Models.Activity>
+
+<h2>Activities</h2>
+
+<p>
+    <a class="btn btn-primary" asp-action="Add">Add Activity</a>
+</p>
+
+@if (!Model.Any())
+{
+    <p>No activities yet.</p>
+}
+else
+{
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+        @foreach (var a in Model)
+        {
+            <tr>
+                <td>@a.Name</td>
+                <td>
+                    <form asp-action="Delete" asp-route-id="@a.ActivityId" method="post" class="d-inline">
+                        @Html.AntiForgeryToken()
+                        <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+}

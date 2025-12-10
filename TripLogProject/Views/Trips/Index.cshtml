@@ -1,0 +1,46 @@
+@model IEnumerable<TripLog.Models.Trip>
+
+<h2>Trips</h2>
+
+<p>
+    <a class="btn btn-primary" asp-action="AddStep1">Add Trip</a>
+</p>
+
+@if (!Model.Any())
+{
+    <p>No trips yet.</p>
+}
+else
+{
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Destination</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Accommodation</th>
+                <th>Things To Do</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+        @foreach (var trip in Model)
+        {
+            var activityNames = string.Join(", ", trip.TripActivities.Select(ta => ta.Activity.Name));
+            <tr>
+                <td>@trip.Destination?.Name</td>
+                <td>@trip.StartDate.ToShortDateString()</td>
+                <td>@trip.EndDate.ToShortDateString()</td>
+                <td>@trip.Accommodation?.Name</td>
+                <td>@activityNames</td>
+                <td>
+                    <form asp-action="Delete" asp-route-id="@trip.TripId" method="post" class="d-inline">
+                        @Html.AntiForgeryToken()
+                        <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+}

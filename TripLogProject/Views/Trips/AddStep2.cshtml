@@ -1,0 +1,21 @@
+@model TripLog.ViewModels.TripStep2ViewModel
+
+<h2>Add Trip - Step 2: Things To Do</h2>
+
+<form asp-action="AddStep2" method="post" class="mt-3">
+    @Html.AntiForgeryToken()
+    <div class="mb-3">
+        <label class="form-label">Select Activities (optional)</label>
+        <select asp-for="SelectedActivityIds" asp-items="Model.Activities" class="form-select" multiple size="8"></select>
+    </div>
+    <button type="submit" class="btn btn-primary">Save Trip</button>
+</form>
+
+<form asp-action="Cancel" method="post" class="mt-2">
+    @Html.AntiForgeryToken()
+    <button type="submit" class="btn btn-secondary">Cancel</button>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

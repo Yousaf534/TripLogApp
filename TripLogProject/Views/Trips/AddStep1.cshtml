@@ -1,0 +1,41 @@
+@model TripLog.ViewModels.TripStep1ViewModel
+
+<h2>Add Trip - Step 1</h2>
+
+<form asp-action="AddStep1" method="post" class="mt-3">
+    @Html.AntiForgeryToken()
+    <div class="mb-3">
+        <label asp-for="DestinationId" class="form-label"></label>
+        <select asp-for="DestinationId" asp-items="Model.Destinations" class="form-select">
+            <option value="">-- Select Destination --</option>
+        </select>
+        <span asp-validation-for="DestinationId" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="AccommodationId" class="form-label"></label>
+        <select asp-for="AccommodationId" asp-items="Model.Accommodations" class="form-select">
+            <option value="">-- Select Accommodation --</option>
+        </select>
+        <span asp-validation-for="AccommodationId" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="StartDate" class="form-label"></label>
+        <input asp-for="StartDate" class="form-control" />
+        <span asp-validation-for="StartDate" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="EndDate" class="form-label"></label>
+        <input asp-for="EndDate" class="form-control" />
+        <span asp-validation-for="EndDate" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Next</button>
+</form>
+
+<form asp-action="Cancel" method="post" class="mt-2">
+    @Html.AntiForgeryToken()
+    <button type="submit" class="btn btn-secondary">Cancel</button>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
